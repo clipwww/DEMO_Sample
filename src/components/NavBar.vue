@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fixed-navbar">
     <md-sidenav class="md-left md-fixed" ref="sidebar">
       <md-toolbar class="md-account-header">
         <md-list class="md-transparent">
@@ -81,3 +81,13 @@
         }
     };
 </script>
+
+<style>
+    .fixed-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+    }
+</style>

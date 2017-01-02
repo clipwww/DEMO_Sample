@@ -34,5 +34,6 @@
 <style>
     .app-viewport {
         padding-bottom: 56px;
+        padding-top: 60px;
     }
 </style>
