@@ -4,7 +4,7 @@
       <md-toolbar class="md-account-header">
         <md-list class="md-transparent">
           <md-list-item class="md-avatar-list">
-            <a href="https://github.com/clipwww/KomicaReader-v3" target="_blank">
+            <a href="https://github.com/clipwww" target="_blank">
               <md-avatar class="md-large">
                     <img :src="pic" alt="People">
               </md-avatar>
