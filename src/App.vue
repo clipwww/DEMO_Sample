@@ -30,3 +30,9 @@
         }
     }
 </script>
+
+<style>
+    .app-viewport {
+        padding-bottom: 56px;
+    }
+</style>

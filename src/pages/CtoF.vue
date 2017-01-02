@@ -1,18 +1,28 @@
 <template>
   <div class="container">
-      <h1>華氏<->攝氏</h1>
-    <!-- 切換模式按鈕 -->
-    <md-checkbox id="my-test1" name="my-test1" v-model="isCelsius">
-        切換：{{ toggleTemperature }}
-    </md-checkbox>
+    <md-card>
+        <md-card-header>
+            <!-- 切換模式按鈕 -->
+            <md-switch v-model="isCelsius" id="isCelsius" name="isCelsius" class="md-primary"></md-switch>
+            <label for="isCelsius">
+                切換：{{ toggleTemperature }}
+            </label>
+        </md-card-header>
 
-    <md-input-container>
-        <label v-if="!isCelsius" class="label-text">攝氏（°C）</label>
-        <label v-if="isCelsius" class="label-text">華氏：（°F）</label>
-        <md-input v-model="userInput"></md-input>
-    </md-input-container>
-    <h2 v-show="isCelsius">攝氏：{{ celsius }} °C</h2>
-    <h2 v-show="!isCelsius">華氏：{{ fahrenheit }} °F</h2>
+        <md-card-actions>
+
+        </md-card-actions>
+
+        <md-card-content>
+            <md-input-container>
+                <label v-if="!isCelsius" class="label-text">攝氏（°C）</label>
+                <label v-if="isCelsius" class="label-text">華氏：（°F）</label>
+                <md-input v-model="userInput"></md-input>
+            </md-input-container>
+            <h2 v-show="isCelsius">攝氏：{{ celsius }} °C</h2>
+            <h2 v-show="!isCelsius">華氏：{{ fahrenheit }} °F</h2>
+        </md-card-content>
+    </md-card>
   </div>
 </template>
 

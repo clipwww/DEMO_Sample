@@ -31,7 +31,7 @@
         
         <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
           <router-link to="/C2F">
-            <md-icon>autorenew</md-icon><span>華氏<->攝氏</span>
+            <md-icon>autorenew</md-icon><span>華氏 ⇌ 攝氏</span>
           </router-link>
         </md-list-item>
 

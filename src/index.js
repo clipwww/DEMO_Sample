@@ -18,7 +18,7 @@ import store from './store'
 const router = new VueRouter({
     routes: [
         { path: '/Home', name: 'Home', component: Home },
-        { path: '/C2F', name: '華氏<->攝氏', component: C2F },
+        { path: '/C2F', name: '華氏 ⇌ 攝氏', component: C2F },
         { path: '/Count', name: '計數器 with Vuex', component: Count },
         { path: '/Todo', name: 'Todo List', component: Todo },
         // router 轉址
