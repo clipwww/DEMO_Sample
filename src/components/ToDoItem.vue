@@ -8,7 +8,6 @@
             <div v-if="updateMode">
                 <md-input-container>
                     <md-input 
-                    v-focus="updateMode"
                     placeholder="Edit Todo"
                     v-model="userInput"
                     ></md-input>
