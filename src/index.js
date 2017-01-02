@@ -21,6 +21,8 @@ const router = new VueRouter({
         { path: '/C2F', name: '華氏<->攝氏', component: C2F },
         { path: '/Count', name: '計數器 with Vuex', component: Count },
         { path: '/Todo', name: 'Todo List', component: Todo },
+        // router 轉址
+        { path: '/*', redirect: '/Home' }
     ]
 })
 
