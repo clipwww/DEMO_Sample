@@ -48,8 +48,8 @@
         mapGetters,
         mapActions
     } from 'vuex';
-    import CustomModal from '../components/CustomModal.vue';
-    import ToDoItem from '../components/ToDoItem.vue';
+    import CustomModal from '../item/CustomModal.vue';
+    import ToDoItem from '../item/ToDoItem.vue';
 
     export default {
         components: {

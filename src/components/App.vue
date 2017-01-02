@@ -13,8 +13,8 @@
 </template>
 
 <script>
-    import NavBar from './components/NavBar.vue';
-    import ButtomBar from './components/ButtomBar.vue';
+    import NavBar from './layout/NavBar.vue';
+    import ButtomBar from './layout/ButtomBar.vue';
     export default {
         components: {
             NavBar: NavBar,

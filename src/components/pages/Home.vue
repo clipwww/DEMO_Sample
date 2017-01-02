@@ -48,7 +48,7 @@
 </template>
 
 <script>
-    import MyPic from '../images/akarinG.gif';
+    import MyPic from '../../images/akarinG.gif';
     export default {
         data() {
             return {

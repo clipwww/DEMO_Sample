@@ -64,7 +64,7 @@
 </template>
 
 <script>
-    import pic from '../images/20637418_m.jpg';
+    import pic from '../../images/20637418_m.jpg';
     export default {
         data() {
             return {

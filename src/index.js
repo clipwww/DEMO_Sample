@@ -7,11 +7,11 @@ Vue.use(VueRouter);
 Vue.use(VueMaterial);
 Vue.use(Vuex);
 
-import App from './App.vue';
-import Home from './pages/Home.vue';
-import C2F from './pages/CtoF.vue';
-import Count from './pages/Count.vue';
-import Todo from './pages/Todo.vue';
+import App from './components/App.vue';
+import Home from './components/pages/Home.vue';
+import C2F from './components/pages/CtoF.vue';
+import Count from './components/pages/Count.vue';
+import Todo from './components/pages/Todo.vue';
 
 import store from './store'
 
