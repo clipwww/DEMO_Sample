@@ -53,17 +53,17 @@
             之後會寫一篇關於自訂：Vue Directive
         */
         directives: {
-            focus(el, {
-                value
-            }, {
-                context
-            }) {
-                if (value) {
-                    context.$nextTick(() => {
-                        el.focus();
-                    })
-                }
-            }
+            // focus(el, {
+            //     value
+            // }, {
+            //     context
+            // }) {
+            //     if (value) {
+            //         context.$nextTick(() => {
+            //             el.focus();
+            //         })
+            //     }
+            // }
         },
         methods: Object.assign({},
             mapActions(['updateTodo', 'toggleTodo', 'deleteTodo']), {
