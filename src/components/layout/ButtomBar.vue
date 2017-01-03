@@ -1,10 +1,9 @@
 <template>
-    <md-bottom-bar md-shift class="fixed-bottom">
-        <md-bottom-bar-item md-icon="ondemand_video">Movies</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="music_note">Music</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="books" md-active>Books</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="photo">Pictures</md-bottom-bar-item>
-    </md-bottom-bar>
+    <md-layout class="fixed-bottom">
+        <slot name="content">
+            Q
+        </slot>
+    </md-layout>
 </template>
 
 <script>

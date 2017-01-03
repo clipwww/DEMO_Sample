@@ -37,7 +37,7 @@
 
         <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
           <router-link to="/Count">
-            <md-icon>alarm_add</md-icon><span>計數器 with Vuex</span>
+            <md-icon>alarm_add</md-icon><span>計數器</span>
           </router-link>
         </md-list-item>
 
@@ -65,6 +65,12 @@
             </md-list-expand>
         </md-list-item>
 
+        <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
+          <router-link to="/LkReader">
+            <md-icon>collections</md-icon><span>輕國漫畫</span>
+          </router-link>
+        </md-list-item>
+
       </md-list>
     </md-sidenav>
 
@@ -77,12 +83,13 @@
         <h2 class="md-title" style="flex: 1">{{ Title }}</h2>
         <span style="flex: 1"></span>
 
-          <md-button class="md-icon-button" v-if="$route.path == '/Shop'" style="width: initial">
+          <!--<md-button class="md-icon-button" v-if="$route.path == '/Shop'" style="width: initial">
             <router-link to="/Cart" style="color: white">
               <md-icon>shopping_cart</md-icon>
               <span style="margin-left: 45px;">{{ CartTotal }}</span>
             </router-link>
-          </md-button>
+          </md-button>-->
+
       </md-toolbar>
     </md-whiteframe>
   </div>

@@ -8,8 +8,6 @@
       <router-view></router-view>
     </div>
 
-    <ButtomBar></ButtomBar>
-
   </div>
 </template>
 
@@ -18,11 +16,10 @@
         mapGetters
     } from 'vuex';
     import NavBar from './layout/NavBar.vue';
-    import ButtomBar from './layout/ButtomBar.vue';
+
     export default {
         components: {
             NavBar: NavBar,
-            ButtomBar: ButtomBar
         },
         data() {
             return {
@@ -41,11 +38,11 @@
 <style lang="scss">
     .app-viewport {
         padding-bottom: 56px;
-        padding-top: 60px;
+        padding-top: 75px;
         max-width: 500px;
         margin: 0 auto;
         .container {
-            padding: 15px;
+            padding: 0 15px;
         }
     }
 </style>

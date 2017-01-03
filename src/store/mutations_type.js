@@ -8,3 +8,4 @@ export const UPDATE_TODO = 'UPDATE_TODO';
 export const ADD_CART = 'ADD_CART';
 export const CANCEL_CART = 'CANCEL_CART';
 export const SET_LOADING = 'SET_LOADING';
+export const FETCH_LK_COMICS = 'FETCH_LK_COMICS';

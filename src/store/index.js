@@ -9,6 +9,7 @@ import { state, actions, mutations } from './app.js';
 import count from './modules/count.js';
 import todo from './modules/todo.js';
 import shop from './modules/shop.js';
+import lkcomic from './modules/lkcomic.js';
 
 Vue.use(Vuex);
 
@@ -22,7 +23,8 @@ export default new Vuex.Store({
     modules: {
         count: count,
         todo: todo,
-        shop: shop
+        shop: shop,
+        lkcomic: lkcomic
     },
     // 嚴格模式，禁止直接修改 state
     strict: true

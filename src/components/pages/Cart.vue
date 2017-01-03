@@ -43,16 +43,17 @@
                 </md-table-body>
             </md-table>
         </md-table-card>
-        <md-layout style="justify-content: space-between;margin-top: 30px;">
-            <md-button class="md-raised md-default">
-                <router-link to="/Shop">
-                    返回購物首頁
-                </router-link>
-            </md-button>
+        <md-layout>
             <md-button class="md-raised md-primary">
                 結帳
             </md-button>
-        </div>
+        </md-layout>
+
+        <ButtomBar>
+            <md-bottom-bar md-shift slot="content">
+                <md-bottom-bar-item href="#/Shop" md-icon="add_shopping_cart" md-active>返回購物頁面</md-bottom-bar-item>
+            </md-bottom-bar>
+        </ButtomBar>
     </div>
 </template>
 
@@ -60,9 +61,13 @@
     import {
         mapGetters,
         mapActions
-    } from 'vuex'
+    } from 'vuex';
+    import ButtomBar from '../layout/ButtomBar.vue';
 
     export default {
+        components: {
+            ButtomBar: ButtomBar
+        },
         computed: mapGetters({
             total: 'getCartPriceTotal',
             recommend: 'getRecommendedProducts',
