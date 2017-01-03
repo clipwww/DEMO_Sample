@@ -6,6 +6,15 @@
         <md-divider></md-divider>
         <md-list>
             <md-list-item>
+                <md-icon>note</md-icon> <span>2017/01/03</span>
+                <md-list-expand>
+                    <md-list>
+                        <md-list-item class="md-inset">ToDo List 用localStorage儲存狀態</md-list-item>
+                        <md-list-item class="md-inset">練習：購物車</md-list-item>
+                    </md-list>
+                </md-list-expand>
+            </md-list-item>
+            <md-list-item>
                 <md-icon>note</md-icon> <span>2017/01/02 Init</span>
                 <md-list-expand>
                     <md-list>
