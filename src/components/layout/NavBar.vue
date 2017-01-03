@@ -47,6 +47,24 @@
           </router-link>
         </md-list-item>
 
+        <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
+            <md-icon>shopping_cart</md-icon><span>購物車</span>
+            <md-list-expand>
+                <md-list>
+                  <router-link to="/Shop">
+                    <md-list-item class="md-inset">購物首頁</md-list-item>
+                  </router-link>
+                  <router-link to="/Cart">
+                    <md-list-item class="md-inset">
+                      結帳頁面
+                       <span style="flex: 1"></span>
+                      <md-icon>shopping_cart</md-icon>　{{ CartTotal }}
+                    </md-list-item>
+                  </router-link>
+                </md-list>
+            </md-list-expand>
+        </md-list-item>
+
       </md-list>
     </md-sidenav>
 
@@ -57,7 +75,14 @@
         </md-button>
 
         <h2 class="md-title" style="flex: 1">{{ Title }}</h2>
+        <span style="flex: 1"></span>
 
+          <md-button class="md-icon-button" v-if="$route.path == '/Shop'" style="width: initial">
+            <router-link to="/Cart" style="color: white">
+              <md-icon>shopping_cart</md-icon>
+              <span style="margin-left: 45px;">{{ CartTotal }}</span>
+            </router-link>
+          </md-button>
       </md-toolbar>
     </md-whiteframe>
   </div>
@@ -65,17 +90,26 @@
 
 <script>
     import pic from '../../images/20637418_m.jpg';
+    import {
+        mapGetters,
+        mapActions
+    } from 'vuex';
+
     export default {
         data() {
             return {
                 pic: pic
             };
         },
-        computed: {
-            Title() {
-                return this.$route.name;
+        computed: Object.assign({},
+            mapGetters({
+                CartTotal: 'getShoppingCartTotal'
+            }), {
+                Title() {
+                    return this.$route.name;
+                },
             }
-        },
+        ),
         methods: {
 
         }

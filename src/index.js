@@ -12,6 +12,8 @@ import Home from './components/pages/Home.vue';
 import C2F from './components/pages/CtoF.vue';
 import Count from './components/pages/Count.vue';
 import Todo from './components/pages/Todo.vue';
+import Shop from './components/pages/Shop.vue';
+import Cart from './components/pages/Cart.vue';
 
 import store from './store'
 
@@ -21,6 +23,8 @@ const router = new VueRouter({
         { path: '/C2F', name: '華氏 ⇌ 攝氏', component: C2F },
         { path: '/Count', name: '計數器 with Vuex', component: Count },
         { path: '/Todo', name: 'Todo List', component: Todo },
+        { path: '/Shop', name: '購物首頁', component: Shop },
+        { path: '/Cart', name: '結帳頁面', component: Cart },
         // router 轉址
         { path: '/*', redirect: '/Home' }
     ]
