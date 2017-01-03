@@ -7,8 +7,6 @@
         </md-input-container>
         <md-button @click="actionIncrease(num)" class="md-raised md-primary">+</md-button>
         <md-button @click="actionDecrease(num)" class="md-raised md-accent">-</md-button>
-
-        <hr/>
         <md-button @click="actionCountReset" class="md-raised md-warn">歸零</md-button>
     </div>
 </template>

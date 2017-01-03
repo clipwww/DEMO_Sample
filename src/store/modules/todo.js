@@ -1,11 +1,14 @@
 import * as types from '../mutations_type.js';
 import Guid from 'guid';
 
+let datas = JSON.parse(localStorage.todo != null ? localStorage.todo : "[]"); //如果還沒有東西就給預設值 []
+
 const state = {
-    todos: [
-        { key: Guid.create().value, content: 'vue.js 2.0', done: true },
-        { key: Guid.create().value, content: 'vuex', done: false },
-    ]
+    todos: datas
+        // [
+        //     { key: Guid.create().value, content: 'vue.js 2.0', done: true },
+        //     { key: Guid.create().value, content: 'vuex', done: false },
+        // ]
 }
 
 const getters = {
@@ -47,6 +50,7 @@ const mutations = {
             content: newTodo, // 新 todo 的內容
             done: false // 預設當然是未做完
         });
+        localStorage.todo = JSON.stringify(state.todos);
     },
     [types.TOGGLE_TODO](state, key) {
         state.todos.map((item) => {
@@ -55,7 +59,8 @@ const mutations = {
                 console.log('TOGGLE_TODO:', item.content, 'done?', item.done);
                 return false;
             }
-        })
+        });
+        localStorage.todo = JSON.stringify(state.todos);
     },
     [types.DELETE_TODO](state, key) {
         for (var i in state.todos) {
@@ -65,7 +70,8 @@ const mutations = {
                 state.todos.splice(i, 1);
                 break;
             }
-        }
+        };
+        localStorage.todo = JSON.stringify(state.todos);
     },
     [types.UPDATE_TODO](state, obj) {
         for (var i in state.todos) {
@@ -76,7 +82,8 @@ const mutations = {
                 state.todos[i].content = obj.change;
                 break;
             }
-        }
+        };
+        localStorage.todo = JSON.stringify(state.todos);
     },
 }
 
