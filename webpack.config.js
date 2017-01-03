@@ -23,14 +23,19 @@ module.exports = {
                 loaders: ['style', 'css']
             },
             {
-                test: /\.scss$/,
-                loader: ["style", "css", "sass"]
+                test: /\.s[a|c]ss$/,
+                loader: 'style!css!sass'
             },
             {
                 test: /\.(png|jpg|svg|gif)$/,
                 loader: 'file'
             }
         ]
+    },
+    vue: {
+        loaders: {
+            scss: ['vue-style-loader', 'css', 'sass'].join('!')
+        }
     },
     babel: {
         presets: ['es2015'],

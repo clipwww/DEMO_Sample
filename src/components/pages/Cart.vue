@@ -1,18 +1,18 @@
 <template>
     <div class="container">
-        <md-card style="margin-bottom: 15px">
+        <md-card style="margin-bottom: 15px" v-if="recommend.inventory > 0">
             <md-card-header>
                 <md-card-header-text>
                     <div class="md-title">{{ recommend.title }}</div>
-                    <div class="md-subhead" v-if="recommend.inventory > 0">$ {{ recommend.price }}</div>
+                    <div class="md-subhead">$ {{ recommend.price }}</div>
                 </md-card-header-text>
 
-                <md-card-media v-if="recommend.inventory > 0">
+                <md-card-media>
                     <img :src="recommend.image" :alt="recommend.title">
                 </md-card-media>
             </md-card-header>
 
-            <md-card-actions style="justify-content: flex-start" v-if="recommend.inventory > 0">
+            <md-card-actions style="justify-content: flex-start">
                 <md-button class="md-raised md-accent" @click="addCart( recommend.id )">加購</md-button>
             </md-card-actions>
         </md-card>
