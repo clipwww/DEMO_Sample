@@ -3,7 +3,6 @@
     
     <NavBar></NavBar>
 
-    <md-spinner :md-size="200" md-indeterminate v-if="isLoading" style="display: block;margin: 30px auto;"></md-spinner>
     <div class="main-container">
       <router-view></router-view>
     </div>

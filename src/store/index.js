@@ -3,13 +3,13 @@ import Vuex from 'vuex'
 
 // root
 import * as getters from './getters.js';
-import { state, actions, mutations } from './app.js';
+import { state, actions, mutations } from './root.js';
 
 //modules
 import count from './modules/count.js';
 import todo from './modules/todo.js';
 import shop from './modules/shop.js';
-import lkcomic from './modules/lkcomic.js';
+import komica from './modules/komica.js';
 
 Vue.use(Vuex);
 
@@ -24,7 +24,7 @@ export default new Vuex.Store({
         count: count,
         todo: todo,
         shop: shop,
-        lkcomic: lkcomic
+        komica: komica
     },
     // 嚴格模式，禁止直接修改 state
     strict: true
