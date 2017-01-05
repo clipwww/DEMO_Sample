@@ -2,18 +2,20 @@ import * as types from '../mutations_type.js';
 
 const state = {
     Posts: [],
-    DetailPosts: [],
+    DetailPost: {},
 }
 
 const getters = {
     getPosts: state => state.Posts,
-    getDetailPosts: state => state.DetailPosts,
+    getDetailPost: state => state.DetailPost,
 }
 
 const actions = {
-    fetchKomica({ commit }, where, page = 1, res = '') {
-
-        let url = "http://komicaapi.apphb.com/api/" + where + "?page=" + page + "&res=" + res;
+    fetchKomica({ commit }, obj) {
+        commit(types.SET_LOADING, true);
+        let page = obj.page ? obj.page : 1;
+        let resNo = obj.res ? obj.res : "";
+        let url = "https://komicaapi.apphb.com/api/" + obj.where + "?page=" + page + "&res=" + resNo;
 
         fetch(url, {
                 // method: 'POST',
@@ -31,10 +33,15 @@ const actions = {
                 }
             })
             .then(data => {
-                commit(types.FETCH_KOMICA, data);
+                commit(types.FETCH_KOMICA, {
+                    data: data,
+                    isDetail: resNo != ""
+                });
+                commit(types.SET_LOADING, false);
             })
             .catch(err => {
                 alert(err);
+                commit(types.SET_LOADING, false);
             });
 
     }
@@ -42,14 +49,21 @@ const actions = {
 
 const mutations = {
     [types.FETCH_KOMICA](state, data) {
-        state.Posts = data.map(function(item) {
+
+        let temp = data.data.map(function(item) {
             item.text = item.text.replace(/onclick/g, 'data-qlink').replace(/href/g, 'data-href');
             item.replyPost = item.replyPost.map(function(reply) {
                 reply.text = reply.text.replace(/onclick/g, 'data-qlink').replace(/href/g, 'data-href');
                 return reply;
             })
             return item;
-        })
+        });
+
+        if (data.isDetail) {
+            state.DetailPost = temp[0];
+        } else {
+            state.Posts = temp;
+        }
     }
 }
 

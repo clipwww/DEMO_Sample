@@ -1,9 +1,8 @@
 <template>
-    <div class="container">
+    <div class="__container">
 
-        <!--<md-spinner id="js-loading" :md-size="100" v-show="isLoading" md-indeterminate style="display: block;margin: 30px auto;"></md-spinner>-->
-        <md-list class="md-triple-line">
-            <md-list-item v-for="item in posts">
+        <md-list class="md-triple-line" v-show="!isShowDetail">
+            <md-list-item v-for="item in posts" style="border-bottom: 1px solid #ddd">
                 <md-avatar >
                     <a @click="openImg(item.imgBig)">
                         <img :src="item.imgSmall" :alt="item.no">
@@ -12,9 +11,9 @@
 
                 <div class="md-list-text-container">
                     <span>{{ item.title }}</span>
-                    <span>{{ item.name + " " +item.id + " | " + item.date + "　" + item.time }}</p>
+                    <span class="info">{{ item.name + " " +item.id + " | " + item.date + "　" + item.time }}</span>
                     <a :href="['#/KomicaLive/Detail/' + item.no]">
-                        More
+                        閱讀全部回覆
                     </a>
                 </div>
 
@@ -43,7 +42,7 @@
             </md-list-item>
         </md-list>        
         
-        <transition name="fade" mode="out-in">
+        <transition v-show="isShowDetail" name="fade" mode="out-in">
             <router-view class="view"></router-view>
         </transition>
         
@@ -61,7 +60,7 @@
                 <img v-show="image != ''" :src="image" alt="bigImg" />
             </div>
             <div slot="actions">
-                <md-button class="md-primary" @click="closeImg">取消</md-button>
+                <md-button class="md-primary" @click="closeImg">關閉</md-button>
             </div>
         </CustomModal>
     </div>
@@ -78,15 +77,16 @@
             padding: 5px 10px !important;
             background-color: #EEDFF0 !important;
         }
-        .info {
-            font-size: 12px;
-            color: lightslategray;
-        }
     }
     
     .resquote {
         color: seagreen;
         font-size: 13px;
+    }
+    
+    .info {
+        font-size: 12px !important;
+        color: lightslategray !important;
     }
 </style>
 
@@ -110,7 +110,9 @@
             }
         },
         created() {
-            this.fetchKomica('Live');
+            this.fetchKomica({
+                where: 'Live',
+            });
         },
         methods: Object.assign({},
             mapActions(['fetchKomica']), {
@@ -130,7 +132,9 @@
             mapGetters({
                 posts: 'getPosts'
             }), {
-
+                isShowDetail() {
+                    return this.$route.path.match('Detail') != null;
+                }
             }
         ),
         updated() {
