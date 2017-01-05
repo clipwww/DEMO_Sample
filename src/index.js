@@ -15,8 +15,6 @@ import Todo from './components/pages/Todo.vue';
 import Shop from './components/pages/Shop.vue';
 import Cart from './components/pages/Cart.vue';
 import KomicaReader from './components/pages/KomicaReader.vue';
-import KomicaNews from './components/pages/nested-pages/KomicaNews.vue';
-import KomicaLive from './components/pages/nested-pages/KomicaLive.vue';
 import KomicaDetail from './components/pages/nested-pages/KomicaDetail.vue';
 
 
@@ -31,18 +29,25 @@ const router = new VueRouter({
         { path: '/Shop', name: '購物首頁', component: Shop },
         { path: '/Cart', name: '結帳頁面', component: Cart },
         {
-            path: '/KomicaReader',
-            name: 'K島',
+            path: '/KomicaLive',
+            name: '新番實況',
             component: KomicaReader,
             children: [
-                { path: 'Live', name: '新番實況', component: KomicaLive },
-                { path: 'News', name: '新番捏他', component: KomicaNews },
                 { path: 'Detail/:id', name: 'Detail', component: KomicaDetail },
             ]
         },
         // router 轉址
         { path: '/*', redirect: '/Home' }
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        console.log(to, from, savedPosition)
+            // return 期望滚动到哪个的位置
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return { x: 0, y: 0 }
+        }
+    }
 })
 
 var app = new Vue({

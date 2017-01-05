@@ -66,8 +66,8 @@
         </md-list-item>
 
         <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
-          <router-link to="/KomicaReader">
-            <md-icon>star_rate</md-icon><span>K島</span>
+          <router-link to="/KomicaLive">
+            <md-icon>star_rate</md-icon><span>新番實況</span>
           </router-link>
         </md-list-item>
 

@@ -4,7 +4,9 @@
     <NavBar></NavBar>
 
     <div class="main-container">
-      <router-view></router-view>
+        <transition name="fade" mode="out-in">
+            <router-view class="view"></router-view>
+        </transition>
     </div>
 
   </div>
@@ -30,6 +32,11 @@
         }),
         methods: {
 
+        },
+        watch: {
+            '$route' (to, from) {
+
+            }
         }
     }
 </script>
@@ -43,5 +50,15 @@
         .container {
             padding: 0 15px;
         }
+    }
+    
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity .5s ease;
+    }
+    
+    .fade-enter,
+    .fade-leave-active {
+        opacity: 0
     }
 </style>

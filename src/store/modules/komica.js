@@ -1,17 +1,19 @@
 import * as types from '../mutations_type.js';
 
 const state = {
-    List: []
+    Posts: [],
+    DetailPosts: [],
 }
 
 const getters = {
-    getNewsList: state => state.List,
+    getPosts: state => state.Posts,
+    getDetailPosts: state => state.DetailPosts,
 }
 
 const actions = {
-    fetchLkComics({ commit }, isInit, page) {
+    fetchKomica({ commit }, where, page = 1, res = '') {
 
-        let url = "http://komicaapi.apphb.com/api/News";
+        let url = "http://komicaapi.apphb.com/api/" + where + "?page=" + page + "&res=" + res;
 
         fetch(url, {
                 // method: 'POST',
@@ -23,7 +25,7 @@ const actions = {
             .then(res => {
                 console.log(res);
                 if (res.ok) {
-                    return res.text();
+                    return res.json();
                 } else {
                     alert(res);
                 }
@@ -40,7 +42,14 @@ const actions = {
 
 const mutations = {
     [types.FETCH_KOMICA](state, data) {
-
+        state.Posts = data.map(function(item) {
+            item.text = item.text.replace(/onclick/g, 'data-qlink').replace(/href/g, 'data-href');
+            item.replyPost = item.replyPost.map(function(reply) {
+                reply.text = reply.text.replace(/onclick/g, 'data-qlink').replace(/href/g, 'data-href');
+                return reply;
+            })
+            return item;
+        })
     }
 }
 
