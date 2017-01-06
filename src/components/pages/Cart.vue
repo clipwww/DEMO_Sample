@@ -75,7 +75,13 @@
         }),
         methods: mapActions([
             'cancelCart',
-            'addCart'
+            'addCart',
         ]),
+        created() {
+
+        },
+        watch: {
+
+        }
     }
 </script>

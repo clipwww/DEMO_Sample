@@ -14,6 +14,7 @@
 
 <script>
     import {
+        mapActions,
         mapGetters
     } from 'vuex';
     import NavBar from './layout/NavBar.vue';
@@ -28,14 +29,13 @@
             }
         },
         computed: mapGetters({
-            isLoading: 'getLoading'
+            isLoading: 'getLoading',
+            PageTitleList: 'getPageTitleList',
         }),
-        methods: {
-
-        },
+        methods: mapActions([]),
         watch: {
             '$route' (to, from) {
-
+                document.body.scrollTop = 0; //回到頂端
             }
         }
     }
@@ -44,7 +44,7 @@
 <style lang="scss">
     .app-viewport {
         padding-bottom: 56px;
-        padding-top: 75px;
+        padding-top: 60px;
         max-width: 500px;
         margin: 0 auto;
         .container {

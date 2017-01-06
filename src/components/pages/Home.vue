@@ -57,6 +57,10 @@
 </template>
 
 <script>
+    import {
+        mapActions,
+        mapGetters
+    } from 'vuex';
     import MyPic from '../../images/akarinG.gif';
     export default {
         data() {
@@ -64,7 +68,11 @@
                 MyPic: MyPic
             }
         },
+        methods: mapActions([]),
         computed: {
+
+        },
+        created() {
 
         }
     }

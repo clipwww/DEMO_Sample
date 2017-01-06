@@ -1,54 +1,32 @@
 <template>
-    <div class="__container">
+    <div id="js-container" class="__container">
 
-        <md-list class="md-triple-line" v-show="!isShowDetail">
-            <md-list-item v-for="item in posts" style="border-bottom: 1px solid #ddd">
-                <md-avatar >
-                    <a @click="openImg(item.imgBig)">
-                        <img :src="item.imgSmall" :alt="item.no">
-                    </a>
-                </md-avatar>
-
-                <div class="md-list-text-container">
-                    <span>{{ item.title }}</span>
-                    <span class="info">{{ item.name + " " +item.id + " | " + item.date + "　" + item.time }}</span>
-                    <a :href="['#/KomicaLive/Detail/' + item.no]">
-                        閱讀全部回覆
-                    </a>
-                </div>
-
-                <md-list-expand>
-                    <md-list>
-                        <md-list-item :id="item.no" class="replyClass">
-                             <span v-html="item.text"></span>
-                        </md-list-item>
-                        <md-list-item v-for="reply in item.replyPost" :id="reply.no"
-                            class="replyClass"
-                            style="min-height: none;">
-                             <md-avatar v-if="reply.imgSmall != null">
-                                <a @click="openImg(reply.imgBig)">
-                                    <img :src="reply.imgSmall" :alt="reply.no">
-                                </a>
-                            </md-avatar>
-                            <span>
-                                <div class="info">{{ "ID：" + reply.no + " | " + reply.name + " " +reply.id }}</div>
-                                <div v-html="reply.text"></div>
-                                <div class="info">{{ reply.date + "  " + reply.time }}</div>
-                            </span>
-                        </md-list-item>
-                    </md-list>
-                </md-list-expand>
-                
-            </md-list-item>
-        </md-list>        
+        <KomicaListItem :posts="posts" v-show="!isShowDetail">
+            
+        </KomicaListItem>
+        <infinite-loading  v-show="!isShowDetail" :on-infinite="onInfinite" v-bind:distance="0" ref="infiniteLoading"></infinite-loading>
         
         <transition v-show="isShowDetail" name="fade" mode="out-in">
-            <router-view class="view"></router-view>
+            <router-view class="view" ref="detail"></router-view>
         </transition>
         
         <ButtomBar>
             <md-bottom-bar md-shift slot="content">
-                <md-bottom-bar-item md-icon="autorenew">重新整理</md-bottom-bar-item>
+                <div @click="reLoadList" v-show="!isShowDetail">
+                    <md-bottom-bar-item :class="{'md-active': !isShowDetail}" md-icon="autorenew">重新整理</md-bottom-bar-item>
+                </div>
+                <div @click="back" v-show="isShowDetail">
+                    <md-bottom-bar-item :class="{'md-active': isShowDetail}" md-icon="keyboard_backspace">返回</md-bottom-bar-item>
+                </div>
+                <div @click="initDetail" v-show="isShowDetail">
+                    <md-bottom-bar-item :class="{'md-active': isShowDetail}" md-icon="autorenew">重新整理</md-bottom-bar-item>
+                </div>
+                <div @click="goBottom" v-show="isShowDetail">
+                    <md-bottom-bar-item :class="{'md-active': isShowDetail}" md-icon="vertical_align_bottom">至底</md-bottom-bar-item>
+                </div>
+                <div @click="goTop" v-show="isShowDetail">
+                    <md-bottom-bar-item :class="{'md-active': isShowDetail}" md-icon="vertical_align_top">至頂</md-bottom-bar-item>
+                </div>
             </md-bottom-bar>
         </ButtomBar>
 
@@ -67,27 +45,7 @@
 </template>
 
 <style lang="scss">
-    .replyClass {
-        border-bottom: 1px solid #808080;
-        span {
-            white-space: normal;
-            line-height: 1.5;
-        }
-        button {
-            padding: 5px 10px !important;
-            background-color: #EEDFF0 !important;
-        }
-    }
-    
-    .resquote {
-        color: seagreen;
-        font-size: 13px;
-    }
-    
-    .info {
-        font-size: 12px !important;
-        color: lightslategray !important;
-    }
+
 </style>
 
 <script>
@@ -97,11 +55,15 @@
     } from 'vuex';
     import ButtomBar from '../layout/ButtomBar.vue';
     import CustomModal from '../item/CustomModal.vue';
+    import KomicaListItem from '../item/KomicaListItem.vue';
+    import InfiniteLoading from 'vue-infinite-loading';
 
     export default {
         components: {
             ButtomBar: ButtomBar,
-            CustomModal: CustomModal
+            CustomModal: CustomModal,
+            KomicaListItem: KomicaListItem,
+            InfiniteLoading: InfiniteLoading
         },
         data() {
             return {
@@ -110,21 +72,50 @@
             }
         },
         created() {
-            this.fetchKomica({
-                where: 'Live',
-            });
+
         },
         methods: Object.assign({},
-            mapActions(['fetchKomica']), {
+            mapActions(['fetchKomica', 'resetPosts']), {
+                initDetail() {
+                    this.$refs.detail.initDetail();
+                },
+                reLoadList() {
+                    this.page = 1;
+                    document.body.scrollTop = 0;
+                    this.resetPosts();
+                },
                 openImg(img) {
                     this.image = img;
                     this.$refs['dialog1'].openDialog('dialog1');
-                    this.$emit('openDialog');
                 },
                 closeImg() {
                     this.$refs['dialog1'].closeDialog('dialog1');
-                    this.$emit('closeDialog');
                     this.image = "";
+                },
+                back() {
+                    location.href = "#/KomicaLive";
+                },
+                goBottom() {
+                    document.body.scrollTop = document.getElementById('js-container').clientHeight;
+                },
+                goTop() {
+                    document.body.scrollTop = 0;
+                },
+                onInfinite() {
+                    if (!this.isShowDetail) {
+                        this.fetchKomica({
+                            where: 'Live',
+                            page: this.page,
+                        });
+                        this.page++;
+                        setTimeout(() => {
+                            this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                        }, 2000)
+                    } else {
+                        setTimeout(() => {
+                            this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                        }, 2000)
+                    }
                 }
             }
         ),
@@ -142,3 +133,9 @@
         }
     }
 </script>
+
+<style>
+    .infinite-loading-container {
+        width: 100%;
+    }
+</style>

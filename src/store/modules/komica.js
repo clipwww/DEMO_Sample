@@ -14,8 +14,8 @@ const actions = {
     fetchKomica({ commit }, obj) {
         commit(types.SET_LOADING, true);
         let page = obj.page ? obj.page : 1;
-        let resNo = obj.res ? obj.res : "";
-        let url = "https://komicaapi.apphb.com/api/" + obj.where + "?page=" + page + "&res=" + resNo;
+        let resNo = obj.res ? "&res=" + obj.res : "";
+        let url = "https://komicaapi.apphb.com/api/" + obj.where + "?page=" + page + resNo;
 
         fetch(url, {
                 // method: 'POST',
@@ -29,21 +29,27 @@ const actions = {
                 if (res.ok) {
                     return res.json();
                 } else {
-                    alert(res);
+                    console.log(res);
                 }
             })
             .then(data => {
                 commit(types.FETCH_KOMICA, {
                     data: data,
-                    isDetail: resNo != ""
+                    isDetail: resNo != "",
+                    isInit: page === 1
                 });
-                commit(types.SET_LOADING, false);
+                if (resNo != "") {
+                    commit(types.SET_LOADING, false);
+                }
             })
             .catch(err => {
-                alert(err);
+                console.log(err);
                 commit(types.SET_LOADING, false);
             });
 
+    },
+    resetPosts({ commit }) {
+        commit(types.RESET_POSTS);
     }
 }
 
@@ -62,8 +68,15 @@ const mutations = {
         if (data.isDetail) {
             state.DetailPost = temp[0];
         } else {
-            state.Posts = temp;
+            if (data.isInit) {
+                state.Posts = temp;
+            } else {
+                state.Posts = state.Posts.concat(temp);
+            }
         }
+    },
+    [types.RESET_POSTS](state) {
+        state.Posts = [];
     }
 }
 

@@ -12,6 +12,7 @@
 
 <script>
     import {
+        mapActions,
         mapGetters
     } from 'vuex';
     import ProductItem from '../Item/ProductItem.vue';
@@ -22,9 +23,13 @@
             ProductItem: ProductItem,
             ButtomBar: ButtomBar
         },
+        methods: mapActions([]),
         computed: mapGetters({
             foodList: 'getProducts',
             CartTotal: 'getShoppingCartTotal',
-        })
+        }),
+        created() {
+
+        }
     }
 </script>

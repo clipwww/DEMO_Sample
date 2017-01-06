@@ -21,33 +21,35 @@ import KomicaDetail from './components/pages/nested-pages/KomicaDetail.vue';
 import store from './store'
 
 const router = new VueRouter({
+    // mode: 'history',
+    // base: __dirname,
     routes: [
-        { path: '/Home', name: 'Home', component: Home },
-        { path: '/C2F', name: '華氏 ⇌ 攝氏', component: C2F },
-        { path: '/Count', name: '計數器', component: Count },
-        { path: '/Todo', name: 'Todo List', component: Todo },
-        { path: '/Shop', name: '購物首頁', component: Shop },
-        { path: '/Cart', name: '結帳頁面', component: Cart },
+        { path: '/Home', name: 'home', component: Home },
+        { path: '/C2F', name: 'c2f', component: C2F },
+        { path: '/Count', name: 'count', component: Count },
+        { path: '/Todo', name: 'todo', component: Todo },
+        { path: '/Shop', name: 'shop', component: Shop },
+        { path: '/Cart', name: 'cart', component: Cart },
         {
             path: '/KomicaLive',
-            name: '新番實況',
+            name: 'KomicaLive',
             component: KomicaReader,
             children: [
-                { path: 'Detail/:id', name: 'Detail', component: KomicaDetail },
+                { path: 'Detail/:id', name: 'detail', component: KomicaDetail },
             ]
         },
         // router 轉址
         { path: '/*', redirect: '/Home' }
     ],
-    scrollBehavior(to, from, savedPosition) {
-        console.log(to, from, savedPosition)
-            // return 期望滚动到哪个的位置
-        if (savedPosition) {
-            return savedPosition
-        } else {
-            return { x: 0, y: 0 }
-        }
-    }
+    // scrollBehavior(to, from, savedPosition) {
+    //     // return 期望滚动到哪个的位置
+    //     // mode: 'history'才能用
+    //     if (savedPosition) {
+    //         return savedPosition
+    //     } else {
+    //         return { x: 0, y: 0 }
+    //     }
+    // }
 })
 
 var app = new Vue({

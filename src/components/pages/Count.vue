@@ -31,6 +31,9 @@
             'actionIncrease',
             'actionDecrease',
             'actionCountReset'
-        ])
+        ]),
+        created() {
+
+        }
     }
 </script>

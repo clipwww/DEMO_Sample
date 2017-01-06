@@ -7,5 +7,8 @@ export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const UPDATE_TODO = 'UPDATE_TODO';
 export const ADD_CART = 'ADD_CART';
 export const CANCEL_CART = 'CANCEL_CART';
-export const SET_LOADING = 'SET_LOADING';
 export const FETCH_KOMICA = 'FETCH_KOMICA';
+export const RESET_POSTS = 'RESET_POSTS';
+
+export const SET_LOADING = 'SET_LOADING';
+export const SET_PAGE_TITLE = 'SET_PAGE_TITLE';
