@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <br/>
         <h2>Count: {{ count }}</h2>
         <md-input-container>
             <label>Set Number</label>

@@ -1,31 +1,17 @@
 <template>
     <div id="js-container" class="__container">
 
-        <KomicaListItem :posts="posts" v-show="!isShowDetail">
-            
-        </KomicaListItem>
-        <infinite-loading  v-show="!isShowDetail" :on-infinite="onInfinite" v-bind:distance="0" ref="infiniteLoading"></infinite-loading>
-        
-        <transition v-show="isShowDetail" name="fade" mode="out-in">
-            <router-view class="view" ref="detail"></router-view>
-        </transition>
-        
+        <KomicaListItem :posts="posts"></KomicaListItem>
+        <md-spinner id="js-loading" :md-size="50" v-show="isLoading" md-indeterminate style="display: block;margin: 30px auto;"></md-spinner>
+        <infinite-loading :on-infinite="onInfinite" v-bind:distance="0" ref="infiniteLoading"></infinite-loading>
+        <div v-show="isDone" style="text-align: center; padding: 30px 0;">
+            No More Data =)
+        </div>
+
         <ButtomBar>
             <md-bottom-bar md-shift slot="content">
-                <div @click="reLoadList" v-show="!isShowDetail">
-                    <md-bottom-bar-item :class="{'md-active': !isShowDetail}" md-icon="autorenew">重新整理</md-bottom-bar-item>
-                </div>
-                <div @click="back" v-show="isShowDetail">
-                    <md-bottom-bar-item :class="{'md-active': isShowDetail}" md-icon="keyboard_backspace">返回</md-bottom-bar-item>
-                </div>
-                <div @click="initDetail" v-show="isShowDetail">
-                    <md-bottom-bar-item :class="{'md-active': isShowDetail}" md-icon="autorenew">重新整理</md-bottom-bar-item>
-                </div>
-                <div @click="goBottom" v-show="isShowDetail">
-                    <md-bottom-bar-item :class="{'md-active': isShowDetail}" md-icon="vertical_align_bottom">至底</md-bottom-bar-item>
-                </div>
-                <div @click="goTop" v-show="isShowDetail">
-                    <md-bottom-bar-item :class="{'md-active': isShowDetail}" md-icon="vertical_align_top">至頂</md-bottom-bar-item>
+                <div @click="reLoadList">
+                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="autorenew">重新整理</md-bottom-bar-item>
                 </div>
             </md-bottom-bar>
         </ButtomBar>
@@ -67,7 +53,7 @@
         },
         data() {
             return {
-                page: 1,
+                page: 0,
                 image: '',
             }
         },
@@ -75,14 +61,20 @@
 
         },
         methods: Object.assign({},
-            mapActions(['fetchKomica', 'resetPosts']), {
-                initDetail() {
-                    this.$refs.detail.initDetail();
-                },
+            mapActions(['fetchKomica', 'resetPosts', 'setIsDone']), {
                 reLoadList() {
-                    this.page = 1;
+                    this.page = 0;
                     document.body.scrollTop = 0;
+                    if (document.body.scrollTop === 0) {
+                        this.fetchKomica({
+                            where: 'Live',
+                            page: this.page,
+                        });
+                        this.page++;
+                    }
+                    this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
                     this.resetPosts();
+                    this.setIsDone(false);
                 },
                 openImg(img) {
                     this.image = img;
@@ -92,36 +84,26 @@
                     this.$refs['dialog1'].closeDialog('dialog1');
                     this.image = "";
                 },
-                back() {
-                    location.href = "#/KomicaLive";
-                },
-                goBottom() {
-                    document.body.scrollTop = document.getElementById('js-container').clientHeight;
-                },
-                goTop() {
-                    document.body.scrollTop = 0;
-                },
                 onInfinite() {
-                    if (!this.isShowDetail) {
+                    console.log("infinite-load")
+                    if (this.isDone) {
+                        // this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                    } else {
                         this.fetchKomica({
                             where: 'Live',
                             page: this.page,
                         });
                         this.page++;
-                        setTimeout(() => {
-                            this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
-                        }, 2000)
-                    } else {
-                        setTimeout(() => {
-                            this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
-                        }, 2000)
                     }
+                    this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
                 }
             }
         ),
         computed: Object.assign({},
             mapGetters({
-                posts: 'getPosts'
+                posts: 'getPosts',
+                isLoading: 'getLoading',
+                isDone: 'getIsDone',
             }), {
                 isShowDetail() {
                     return this.$route.path.match('Detail') != null;
@@ -135,7 +117,5 @@
 </script>
 
 <style>
-    .infinite-loading-container {
-        width: 100%;
-    }
+
 </style>

@@ -3,17 +3,19 @@ import * as types from '../mutations_type.js';
 const state = {
     Posts: [],
     DetailPost: {},
+    isDone: false,
 }
 
 const getters = {
     getPosts: state => state.Posts,
     getDetailPost: state => state.DetailPost,
+    getIsDone: state => state.isDone,
 }
 
 const actions = {
     fetchKomica({ commit }, obj) {
         commit(types.SET_LOADING, true);
-        let page = obj.page ? obj.page : 1;
+        let page = obj.page ? obj.page : 0;
         let resNo = obj.res ? "&res=" + obj.res : "";
         let url = "https://komicaapi.apphb.com/api/" + obj.where + "?page=" + page + resNo;
 
@@ -30,13 +32,14 @@ const actions = {
                     return res.json();
                 } else {
                     console.log(res);
+                    commit(types.SET_DONE, true);
                 }
             })
             .then(data => {
                 commit(types.FETCH_KOMICA, {
                     data: data,
                     isDetail: resNo != "",
-                    isInit: page === 1
+                    isInit: page === 0
                 });
                 if (resNo != "") {
                     commit(types.SET_LOADING, false);
@@ -50,6 +53,9 @@ const actions = {
     },
     resetPosts({ commit }) {
         commit(types.RESET_POSTS);
+    },
+    setIsDone({ commit }, bool) {
+        commit(types.SET_DONE, bool);
     }
 }
 
@@ -77,6 +83,9 @@ const mutations = {
     },
     [types.RESET_POSTS](state) {
         state.Posts = [];
+    },
+    [types.SET_DONE](state, bool) {
+        state.isDone = bool;
     }
 }
 

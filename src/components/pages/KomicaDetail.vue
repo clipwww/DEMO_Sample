@@ -1,9 +1,7 @@
 <template>
-    <div class="__container">
+    <div id="js-container" class="__container">
 
-        <md-spinner id="js-loading" :md-size="100" v-show="isLoading" md-indeterminate style="display: block;margin: 30px auto;"></md-spinner>
-
-         <md-list class="md-triple-line" v-show="!isLoading" transition="fade">
+         <md-list class="md-triple-line" v-show="!isLoading">
             <md-list-item style="border-bottom: 1px solid #ddd">
                 <md-avatar >
                     <a @click="openImg(detail.imgBig)">
@@ -37,6 +35,37 @@
                 </span>
             </md-list-item>
         </md-list>  
+
+        <md-spinner id="js-loading" :md-size="100" v-show="isLoading" md-indeterminate style="display: block;margin: 30px auto;"></md-spinner>
+    
+        <ButtomBar>
+            <md-bottom-bar md-shift slot="content">
+                <div @click="back">
+                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="keyboard_backspace">返回</md-bottom-bar-item>
+                </div>
+                <div @click="initDetail">
+                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="autorenew">重新整理</md-bottom-bar-item>
+                </div>
+                <div @click="goBottom">
+                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="vertical_align_bottom">至底</md-bottom-bar-item>
+                </div>
+                <div @click="goTop">
+                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="vertical_align_top">至頂</md-bottom-bar-item>
+                </div>
+            </md-bottom-bar>
+        </ButtomBar>
+
+        <CustomModal ref='dialog1'>
+            <div slot="title">
+               
+            </div>
+            <div slot="content">
+                <img v-show="image != ''" :src="image" alt="bigImg" />
+            </div>
+            <div slot="actions">
+                <md-button class="md-primary" @click="closeImg">關閉</md-button>
+            </div>
+        </CustomModal>
     </div>
 </template>
 
@@ -45,31 +74,45 @@
         mapGetters,
         mapActions
     } from 'vuex';
-    import ButtomBar from '../../layout/ButtomBar.vue';
+    import ButtomBar from '../layout/ButtomBar.vue';
+    import CustomModal from '../item/CustomModal.vue';
 
     export default {
         components: {
             ButtomBar: ButtomBar,
+            CustomModal: CustomModal,
         },
         data() {
             return {
-
+                image: "",
             }
         },
         methods: Object.assign({},
             mapActions(['fetchKomica']), {
                 initDetail() {
+                    document.body.scrollTop = 0;
                     this.fetchKomica({
                         where: 'Live',
                         res: this.$route.params.id
                     });
                 },
                 openImg(img) {
-                    this.$parent.openImg(img);
+                    this.image = img;
+                    this.$refs['dialog1'].openDialog('dialog1');
                 },
                 closeImg() {
-                    this.$parent.$refs['dialog1'].closeDialog('dialog1');
-                }
+                    this.$refs['dialog1'].closeDialog('dialog1');
+                    this.image = "";
+                },
+                back() {
+                    location.href = "#/KomicaLive";
+                },
+                goBottom() {
+                    document.body.scrollTop = document.getElementById('js-container').clientHeight;
+                },
+                goTop() {
+                    document.body.scrollTop = 0;
+                },
             }
         ),
         computed: Object.assign({},

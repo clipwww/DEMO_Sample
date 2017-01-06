@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <br/>
         <ProductItem v-for="(item, index) in foodList" :item="item"></ProductItem>
 
         <ButtomBar>

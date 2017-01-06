@@ -1,31 +1,23 @@
 <template>
     <div class="container">
+        <br/>
         <md-subheader style="font-size: 20px;">
-            Log（？）
+            Log
         </md-subheader>
         <md-divider></md-divider>
         <md-list>
-            <md-list-item>
-                <md-icon>note</md-icon> <span>2017/01/03</span>
+            <md-list-item v-for="item in log">
+                <md-icon>note</md-icon> <span>{{ item.title }}</span>
                 <md-list-expand>
                     <md-list>
-                        <md-list-item class="md-inset">ToDo List 用localStorage儲存狀態</md-list-item>
-                        <md-list-item class="md-inset">練習：購物車</md-list-item>
-                    </md-list>
-                </md-list-expand>
-            </md-list-item>
-            <md-list-item>
-                <md-icon>note</md-icon> <span>2017/01/02 Init</span>
-                <md-list-expand>
-                    <md-list>
-                        <md-list-item class="md-inset">練習：華氏攝氏轉換</md-list-item>
-                        <md-list-item class="md-inset">練習：計數器 with Vuex</md-list-item>
-                        <md-list-item class="md-inset">練習：ToDo List with Vuex</md-list-item>
+                        <md-list-item v-for="text in item.list" class="md-inset">
+                            <div style="white-space: normal;color:#808080">{{ text }}</div>
+                        </md-list-item>
                     </md-list>
                 </md-list-expand>
             </md-list-item>
         </md-list>
-        <md-card>
+        <!--<md-card>
             <md-card-media>
                 <img :src="MyPic" alt="MyPic">
             </md-card-media>
@@ -52,7 +44,7 @@
             <md-card-content>
 
             </md-card-content>
-        </md-card>
+        </md-card>-->
     </div>
 </template>
 
@@ -62,6 +54,7 @@
         mapGetters
     } from 'vuex';
     import MyPic from '../../images/akarinG.gif';
+
     export default {
         data() {
             return {
@@ -69,9 +62,9 @@
             }
         },
         methods: mapActions([]),
-        computed: {
-
-        },
+        computed: mapGetters({
+            log: 'getLog',
+        }),
         created() {
 
         }

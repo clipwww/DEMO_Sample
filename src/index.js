@@ -15,7 +15,7 @@ import Todo from './components/pages/Todo.vue';
 import Shop from './components/pages/Shop.vue';
 import Cart from './components/pages/Cart.vue';
 import KomicaReader from './components/pages/KomicaReader.vue';
-import KomicaDetail from './components/pages/nested-pages/KomicaDetail.vue';
+import KomicaDetail from './components/pages/KomicaDetail.vue';
 
 
 import store from './store'
@@ -30,14 +30,8 @@ const router = new VueRouter({
         { path: '/Todo', name: 'todo', component: Todo },
         { path: '/Shop', name: 'shop', component: Shop },
         { path: '/Cart', name: 'cart', component: Cart },
-        {
-            path: '/KomicaLive',
-            name: 'KomicaLive',
-            component: KomicaReader,
-            children: [
-                { path: 'Detail/:id', name: 'detail', component: KomicaDetail },
-            ]
-        },
+        { path: '/KomicaLive', name: 'Live', component: KomicaReader, },
+        { path: '/KomicaLive/Detail/:id', name: 'detail', component: KomicaDetail },
         // router 轉址
         { path: '/*', redirect: '/Home' }
     ],
