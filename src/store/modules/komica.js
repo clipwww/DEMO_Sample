@@ -41,9 +41,7 @@ const actions = {
                     isDetail: resNo != "",
                     isInit: page === 0
                 });
-                if (resNo != "") {
-                    commit(types.SET_LOADING, false);
-                }
+                commit(types.SET_LOADING, false);
             })
             .catch(err => {
                 console.log(err);

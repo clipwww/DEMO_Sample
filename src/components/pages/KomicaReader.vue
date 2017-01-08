@@ -2,9 +2,8 @@
     <div id="js-container" class="__container">
 
         <KomicaListItem :posts="posts"></KomicaListItem>
-        <md-spinner id="js-loading" :md-size="50" v-show="isLoading" md-indeterminate style="display: block;margin: 30px auto;"></md-spinner>
         <infinite-loading :on-infinite="onInfinite" v-bind:distance="0" ref="infiniteLoading"></infinite-loading>
-        <div v-show="isDone" style="text-align: center; padding: 30px 0;">
+        <div v-if="isDone" style="text-align: center; padding: 30px 0;">
             No More Data =)
         </div>
 
@@ -102,7 +101,6 @@
         computed: Object.assign({},
             mapGetters({
                 posts: 'getPosts',
-                isLoading: 'getLoading',
                 isDone: 'getIsDone',
             }), {
                 isShowDetail() {

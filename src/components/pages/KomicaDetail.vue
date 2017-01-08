@@ -35,8 +35,6 @@
                 </span>
             </md-list-item>
         </md-list>  
-
-        <md-spinner id="js-loading" :md-size="100" v-show="isLoading" md-indeterminate style="display: block;margin: 30px auto;"></md-spinner>
     
         <ButtomBar>
             <md-bottom-bar md-shift slot="content">

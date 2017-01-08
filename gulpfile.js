@@ -13,7 +13,7 @@ gulp.task('image', function() {
 
 //合併壓縮css
 gulp.task('minify-css', function() {
-    return gulp.src('src/css/*.css')
+    return gulp.src('src/css/temp/*.css')
         .pipe(concat('all.css'))
         .pipe(minifyCSS({
             keepBreaks: true,

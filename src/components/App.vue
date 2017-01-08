@@ -1,6 +1,8 @@
 <template>
   <div class="app-viewport">
     
+    <div v-if="isLoading" class="loader loader-default is-active" data-text="Loading..."></div>
+
     <NavBar></NavBar>
 
     <div class="main-container">
@@ -42,6 +44,8 @@
 </script>
 
 <style lang="scss">
+    @import 'node_modules/sweetalert2/src/sweetalert2.scss';
+    @import '../css/all.min.css';
     .app-viewport {
         padding-bottom: 56px;
         padding-top: 60px;

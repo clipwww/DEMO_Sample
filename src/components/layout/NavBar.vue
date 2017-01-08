@@ -71,6 +71,12 @@
           </router-link>
         </md-list-item>
 
+        <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
+          <router-link to="/Member">
+            <md-icon>vpn_key</md-icon><span>{{ PageTitleList['/Member'] }}</span>
+          </router-link>
+        </md-list-item>
+
       </md-list>
     </md-sidenav>
 
@@ -135,6 +141,6 @@
         top: 0;
         left: 0;
         right: 0;
-        z-index: 9999;
+        z-index: 999999999;
     }
 </style>
