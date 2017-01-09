@@ -10,7 +10,7 @@
         <ButtomBar>
             <md-bottom-bar md-shift slot="content">
                 <div @click="reLoadList">
-                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="autorenew">重新整理</md-bottom-bar-item>
+                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="autorenew">{{ $t('Refresh') }}</md-bottom-bar-item>
                 </div>
             </md-bottom-bar>
         </ButtomBar>
@@ -23,7 +23,7 @@
                 <img v-show="image != ''" :src="image" alt="bigImg" />
             </div>
             <div slot="actions">
-                <md-button class="md-primary" @click="closeImg">關閉</md-button>
+                <md-button class="md-primary" @click="closeImg">{{ $t('Close') }}</md-button>
             </div>
         </CustomModal>
     </div>

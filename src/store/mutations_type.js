@@ -11,6 +11,7 @@ export const FETCH_KOMICA = 'FETCH_KOMICA';
 export const RESET_POSTS = 'RESET_POSTS';
 export const SET_DONE = 'SET_DONE';
 
+export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_TOKEN = 'SET_TOKEN';
 export const SET_PAGE_TITLE = 'SET_PAGE_TITLE';

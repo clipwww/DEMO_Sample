@@ -25,34 +25,34 @@
       <md-list>
         <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
           <router-link to="/Home">
-            <md-icon>home</md-icon><span>{{ PageTitleList['/Home'] }}</span>
+            <md-icon>home</md-icon><span>{{ $t(PageTitleList['/Home']) }}</span>
           </router-link>
         </md-list-item>
         
         <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
           <router-link to="/C2F">
-            <md-icon>autorenew</md-icon><span>{{ PageTitleList['/C2F'] }}</span>
+            <md-icon>autorenew</md-icon><span>{{ $t(PageTitleList['/C2F']) }}</span>
           </router-link>
         </md-list-item>
 
         <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
-          <router-link to="/Count">
-            <md-icon>alarm_add</md-icon><span>{{ PageTitleList['/Count'] }}</span>
+          <router-link to="/Counter">
+            <md-icon>alarm_add</md-icon><span>{{ $t(PageTitleList['/Counter']) }}</span>
           </router-link>
         </md-list-item>
 
         <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
           <router-link to="/Todo">
-            <md-icon>list</md-icon><span>{{ PageTitleList['/Todo'] }}</span>
+            <md-icon>list</md-icon><span>{{ $t(PageTitleList['/Todo']) }}</span>
           </router-link>
         </md-list-item>
 
         <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
-            <md-icon>shopping_cart</md-icon><span>購物車</span>
+            <md-icon>shopping_cart</md-icon><span>{{ $t('Shopping_Cart' )}}</span>
             <md-list-expand>
                 <md-list>
                   <router-link to="/Shop">
-                    <md-list-item class="md-inset">{{ PageTitleList['/Shop'] }}</md-list-item>
+                    <md-list-item class="md-inset">{{ $t(PageTitleList['/Shop']) }}</md-list-item>
                   </router-link>
                   <router-link to="/Cart">
                     <md-list-item class="md-inset">
@@ -67,13 +67,19 @@
 
         <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
           <router-link to="/KomicaLive">
-            <md-icon>star_rate</md-icon><span>{{ PageTitleList['/KomicaLive'] }}</span>
+            <md-icon>star_rate</md-icon><span>{{ $t(PageTitleList['/KomicaLive']) }}</span>
           </router-link>
         </md-list-item>
 
         <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
           <router-link to="/Member">
-            <md-icon>vpn_key</md-icon><span>{{ PageTitleList['/Member'] }}</span>
+            <md-icon>vpn_key</md-icon><span>{{ $t(PageTitleList['/Member']) }}</span>
+          </router-link>
+        </md-list-item>
+
+        <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
+          <router-link to="/Setting">
+            <md-icon>settings</md-icon><span>{{ $t(PageTitleList['/Setting']) }}</span>
           </router-link>
         </md-list-item>
 
@@ -86,15 +92,14 @@
           <md-icon>menu</md-icon>
         </md-button>
 
-        <h2 class="md-title" style="flex: 1">{{ PageTitle }}</h2>
+        <h2 class="md-title" style="flex: 1">{{ $t(PageTitle) }}</h2>
         <span style="flex: 1"></span>
 
-          <!--<md-button class="md-icon-button" v-if="$route.path == '/Shop'" style="width: initial">
-            <router-link to="/Cart" style="color: white">
-              <md-icon>shopping_cart</md-icon>
-              <span style="margin-left: 45px;">{{ CartTotal }}</span>
+          <md-button class="md-icon-button">
+            <router-link to="/Setting" style="color: white">
+              <md-icon>settings</md-icon>
             </router-link>
-          </md-button>-->
+          </md-button>
 
       </md-toolbar>
     </md-whiteframe>

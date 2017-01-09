@@ -14,20 +14,20 @@
             </md-card-header>
 
             <md-card-actions style="justify-content: flex-start">
-                <md-button class="md-raised md-accent" @click="addCart( recommend.id )">加購</md-button>
+                <md-button class="md-raised md-accent" @click="addCart( recommend.id )">{{ $t('Additional_Purchase') }}</md-button>
             </md-card-actions>
         </md-card>
 
         <md-table-card>
             <md-toolbar>
-                <h1 class="md-title">總計：${{ total }}元</h1>
+                <h1 class="md-title">{{ $t('Total') }}：${{ total }}元</h1>
             </md-toolbar>
             <md-table>
                 <md-table-header>
                     <md-table-row>
-                        <md-table-head>餐點</md-table-head>
-                        <md-table-head md-numeric>價格</md-table-head>
-                        <md-table-head md-numeric>取消</md-table-head>
+                        <md-table-head>{{ $t('Meals') }}</md-table-head>
+                        <md-table-head md-numeric>{{ $t('Price') }}</md-table-head>
+                        <md-table-head md-numeric>{{ $t('Cancel') }}</md-table-head>
                     </md-table-row>
                 </md-table-header>
 
@@ -46,13 +46,13 @@
         </md-table-card>
         <md-layout>
             <md-button class="md-raised md-primary">
-                結帳
+                {{ $t('Confirm') }}
             </md-button>
         </md-layout>
 
         <ButtomBar>
             <md-bottom-bar md-shift slot="content">
-                <md-bottom-bar-item href="#/Shop" md-icon="add_shopping_cart" md-active>返回購物頁面</md-bottom-bar-item>
+                <md-bottom-bar-item href="#/Shop" md-icon="add_shopping_cart" md-active>{{ $t('Back_Shopping') }}</md-bottom-bar-item>
             </md-bottom-bar>
         </ButtomBar>
     </div>

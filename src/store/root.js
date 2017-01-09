@@ -1,22 +1,31 @@
 import * as types from './mutations_type.js';
 import Guid from 'guid';
+// 為了設定語系引入 Vue
+import Vue from 'vue';
 
 export const state = {
+    lang: "en",
     isLoading: false,
     token: '',
     PageTitleList: {
         default: "Demo Sample",
-        '/Home': "首頁",
-        '/C2F': "華氏 ⇌ 攝氏",
-        '/Count': '計數器',
-        '/Todo': 'Todo',
-        '/Shop': '購物首頁',
-        '/Cart': '結帳頁面',
-        '/KomicaLive': '新番實況',
-        '/Member': '會員專區',
-        '/Login': '登入',
+        '/Home': "Home",
+        '/Setting': 'Setting',
+        '/C2F': "C2F",
+        '/Counter': 'Counter',
+        '/Todo': 'ToDo',
+        '/Shop': 'Shop',
+        '/Cart': 'Cart',
+        '/KomicaLive': 'Komica_Live',
+        '/Member': 'Member',
+        '/Login': 'Login',
     },
     log: [{
+            title: "2017/01/09",
+            list: [
+                '練習: i18n多語系'
+            ]
+        }, {
             title: "2017/01/07",
             list: [
                 '練習: 登入 + vue-router驗證'
@@ -47,6 +56,9 @@ export const state = {
 }
 
 export const actions = {
+    setLanguage({ commit }, lang) {
+        commit(types.SET_LANGUAGE, lang);
+    },
     toggleLoading({ commit }, isLoading) {
         commit(types.SET_LOADING, isLoading);
     },
@@ -71,6 +83,11 @@ export const actions = {
 }
 
 export const mutations = {
+    [types.SET_LANGUAGE](state, lang) {
+        state.lang = lang;
+        // 設定 Vue config 將會改變 i18n 使用的語言包而更改語系！
+        Vue.config.lang = state.lang;
+    },
     [types.SET_LOADING](state, isLoading) {
         state.isLoading = isLoading;
     },

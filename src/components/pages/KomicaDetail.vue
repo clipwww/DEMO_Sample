@@ -39,16 +39,16 @@
         <ButtomBar>
             <md-bottom-bar md-shift slot="content">
                 <div @click="back">
-                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="keyboard_backspace">返回</md-bottom-bar-item>
+                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="keyboard_backspace">{{ $t('Back') }}</md-bottom-bar-item>
                 </div>
                 <div @click="initDetail">
-                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="autorenew">重新整理</md-bottom-bar-item>
+                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="autorenew">{{ $t('Refresh') }}</md-bottom-bar-item>
                 </div>
                 <div @click="goBottom">
-                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="vertical_align_bottom">至底</md-bottom-bar-item>
+                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="vertical_align_bottom">{{ $t('To_Bottom') }}</md-bottom-bar-item>
                 </div>
                 <div @click="goTop">
-                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="vertical_align_top">至頂</md-bottom-bar-item>
+                    <md-bottom-bar-item :class="{'md-active': true}" md-icon="vertical_align_top">{{ $t('To_Top') }}</md-bottom-bar-item>
                 </div>
             </md-bottom-bar>
         </ButtomBar>
@@ -61,7 +61,7 @@
                 <img v-show="image != ''" :src="image" alt="bigImg" />
             </div>
             <div slot="actions">
-                <md-button class="md-primary" @click="closeImg">關閉</md-button>
+                <md-button class="md-primary" @click="closeImg">{{ $t('Close') }}</md-button>
             </div>
         </CustomModal>
     </div>

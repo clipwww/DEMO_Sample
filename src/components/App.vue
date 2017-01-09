@@ -43,7 +43,9 @@
     }
 </script>
 
+<!--<style src="../../node_modules/vue-material/dist/vue-material.css"></style>-->
 <style lang="scss">
+    @import '../../node_modules/vue-material/dist/vue-material.css';
     @import 'node_modules/sweetalert2/src/sweetalert2.scss';
     @import '../css/all.min.css';
     .app-viewport {

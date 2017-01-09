@@ -18,7 +18,7 @@
                 'md-primary': item.inventory >= 2,
             }"
             :disabled="!item.inventory"
-            @click="addCart( item.id )">{{ ButtonText }}</md-button>
+            @click="addCart( item.id )">{{ $t(ButtonText) }}</md-button>
         </md-card-actions>
     </md-card>
 </template>
@@ -43,11 +43,11 @@
         computed: {
             ButtonText() {
                 if (this.item.inventory == 1) {
-                    return "最後 " + this.item.inventory + " 客";
+                    return this.item.inventory;
                 } else if (this.item.inventory >= 2) {
-                    return "限量 " + this.item.inventory + " 客";
+                    return this.item.inventory;
                 } else {
-                    return "賣完惹";
+                    return 'Sold_Out';
                 }
 
             }

@@ -6,7 +6,7 @@
             <!-- 切換模式按鈕 -->
             <md-switch v-model="isCelsius" id="isCelsius" name="isCelsius" class="md-primary"></md-switch>
             <label for="isCelsius">
-                切換：{{ toggleTemperature }}
+                {{ $t("Switch") }}：{{ $t(toggleTemperature) }}
             </label>
         </md-card-header>
 
@@ -16,12 +16,12 @@
 
         <md-card-content>
             <md-input-container>
-                <label v-if="!isCelsius" class="label-text">攝氏（°C）</label>
-                <label v-if="isCelsius" class="label-text">華氏：（°F）</label>
+                <label v-if="!isCelsius" class="label-text">{{ $t('Celsius') }}（°C）</label>
+                <label v-if="isCelsius" class="label-text">{{ $t('Fahrenheit') }}（°F）</label>
                 <md-input v-model="userInput"></md-input>
             </md-input-container>
-            <h2 v-show="isCelsius">攝氏：{{ celsius }} °C</h2>
-            <h2 v-show="!isCelsius">華氏：{{ fahrenheit }} °F</h2>
+            <h2 v-show="isCelsius">{{ $t('Celsius') }}：<br/>{{ celsius }} °C</h2>
+            <h2 v-show="!isCelsius">{{ $t('Fahrenheit') }}：<br/>{{ fahrenheit }} °F</h2>
         </md-card-content>
     </md-card>
   </div>
@@ -43,7 +43,7 @@
                 return (this.userInput - 32) * 5 / 9;
             },
             toggleTemperature() {
-                return this.isCelsius ? "攝氏 轉換 華氏" : "華氏 轉換 攝氏";
+                return this.isCelsius ? "Celsius_To_Fahrenheit " : "Fahrenheit_To_Celsius";
             }
         },
         methodes: {

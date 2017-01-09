@@ -1,15 +1,16 @@
 <template>
     <div class="container">
         <br/>
+        <h2>{{ $t('Please_Sign_In') }}</h2>
         <md-input-container>
-            <label>E-mail Address</label>
-            <md-input placeholder="E-mail Address" type="email" v-model="email"></md-input>
+            <label>{{ $t('Email_Address') }}</label>
+            <md-input :placeholder="$t('Email_Address')" type="email" v-model="email"></md-input>
         </md-input-container>
         <md-input-container md-has-password>
-            <label>密碼</label>
-            <md-input type="password" placeholder="密碼：123" v-model="password"></md-input>
+            <label>{{ $t('Password') }}</label>
+            <md-input type="password" :placeholder="$t('Password') + '：123'" v-model="password"></md-input>
         </md-input-container>
-        <md-button @click="login" class="md-raised md-primary">登入</md-button>
+        <md-button @click="login" class="md-raised md-primary">{{ $t('Sign_In') }}</md-button>
 
     </div>
 </template>
@@ -46,8 +47,8 @@
                     .catch(() => { //接收到 reject
                         swal({
                             type: 'error',
-                            title: '登入失敗',
-                            text: '帳號或密碼錯誤！'
+                            title: this.$t('Login_Error_Title'),
+                            text: this.$t('Login_Error_Msg')
                         })
                     })
             }
